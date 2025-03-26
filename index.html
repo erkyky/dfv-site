@@ -18,6 +18,164 @@
     <link rel="icon" type="image/png" sizes="512x512" href="ico/android-chrome-512x512.png">
     <link rel="icon" type="image/png" sizes="32x32" href="ico/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="ico/favicon-16x16.png">
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all sections and add page indicators
+            const sections = document.querySelectorAll('section');
+            const nav = document.querySelector('.nav');
+            const body = document.querySelector('body');
+            
+            // Add page indicators
+            const pageIndicators = document.createElement('div');
+            pageIndicators.className = 'page-indicators';
+            
+            for (let i = 0; i < sections.length; i++) {
+                const indicator = document.createElement('div');
+                indicator.className = 'page-indicator';
+                if (i === 0) indicator.classList.add('active');
+                pageIndicators.appendChild(indicator);
+            }
+            
+            body.appendChild(pageIndicators);
+            
+            // Initially hide all sections except the first one
+            for (let i = 1; i < sections.length; i++) {
+                sections[i].classList.add('hidden-section');
+            }
+            
+            // Current section index
+            let currentSection = 0;
+            // Flag to prevent rapid transitions
+            let isTransitioning = false;
+            
+            // Function to switch sections
+            function switchSection(direction) {
+                if (isTransitioning) return;
+                isTransitioning = true;
+                
+                // Hide current section
+                sections[currentSection].classList.add('section-exit');
+                
+                // Get indicators
+                const indicators = document.querySelectorAll('.page-indicator');
+                indicators[currentSection].classList.remove('active');
+                
+                setTimeout(() => {
+                    sections[currentSection].classList.add('hidden-section');
+                    sections[currentSection].classList.remove('section-exit');
+                    
+                    // Calculate next section
+                    let nextSection;
+                    if (direction === 'next') {
+                        nextSection = (currentSection + 1) % sections.length;
+                    } else if (direction === 'prev') {
+                        nextSection = (currentSection - 1 + sections.length) % sections.length;
+                    } else {
+                        nextSection = direction; // If a specific section index is provided
+                    }
+                    
+                    currentSection = nextSection;
+                    
+                    // Update page indicators
+                    indicators[currentSection].classList.add('active');
+                    
+                    // Show next section
+                    sections[currentSection].classList.remove('hidden-section');
+                    sections[currentSection].classList.add('section-enter');
+                    
+                    setTimeout(() => {
+                        sections[currentSection].classList.remove('section-enter');
+                        isTransitioning = false;
+                    }, 600);
+                }, 600);
+            }
+            
+            // Handle navigation click events
+            document.querySelector('a[href="#thesis"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Only switch if not already on thesis section
+                if (currentSection !== 1) {
+                    switchSection(1); // Go directly to thesis section (index 1)
+                }
+            });
+            
+            // Handle scroll indicator click
+            document.querySelector('.scroll-indicator').addEventListener('click', function() {
+                switchSection('next');
+            });
+            
+            // Handle keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+                    switchSection('next');
+                } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                    switchSection('prev');
+                }
+            });
+            
+            // Handle wheel/scroll events
+            let wheelTimeout;
+            document.addEventListener('wheel', function(e) {
+                if (wheelTimeout) return;
+                
+                wheelTimeout = setTimeout(() => {
+                    wheelTimeout = null;
+                }, 1000); // Debounce scroll events
+                
+                if (e.deltaY > 0) {
+                    switchSection('next');
+                } else {
+                    switchSection('prev');
+                }
+            });
+            
+            // Handle page indicator clicks
+            document.querySelectorAll('.page-indicator').forEach((indicator, index) => {
+                indicator.addEventListener('click', function() {
+                    if (currentSection !== index) {
+                        switchSection(index);
+                    }
+                });
+            });
+            
+            // Handle logo click to go back to first section
+            document.querySelector('.logo').addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Only switch if not already on first section
+                if (currentSection !== 0) {
+                    switchSection(0); // Go directly to first section
+                }
+            });
+            
+            // Add swipe support for mobile
+            let touchStartX = 0;
+            let touchStartY = 0;
+            
+            document.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+                touchStartY = e.changedTouches[0].screenY;
+            }, false);
+            
+            document.addEventListener('touchend', function(e) {
+                const touchEndX = e.changedTouches[0].screenX;
+                const touchEndY = e.changedTouches[0].screenY;
+                const xDiff = touchStartX - touchEndX;
+                const yDiff = touchStartY - touchEndY;
+                
+                // Detect if it was a vertical swipe (more y movement than x)
+                if (Math.abs(yDiff) > Math.abs(xDiff)) {
+                    if (yDiff > 50) { // Swipe up
+                        switchSection('next');
+                    } else if (yDiff < -50) { // Swipe down
+                        switchSection('prev');
+                    }
+                }
+            }, false);
+        });
+    </script>
 </head>
 <body>
     <!-- Navigation -->
