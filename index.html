@@ -33,21 +33,29 @@
             for (let i = 0; i < sections.length; i++) {
                 const indicator = document.createElement('div');
                 indicator.className = 'page-indicator';
-                if (i === 0) indicator.classList.add('active');
                 pageIndicators.appendChild(indicator);
             }
             
             body.appendChild(pageIndicators);
             
-            // Initially hide all sections except the first one
-            for (let i = 1; i < sections.length; i++) {
-                sections[i].classList.add('hidden-section');
-            }
+            // Check if there's a saved section in sessionStorage
+            const savedSection = sessionStorage.getItem('currentSection');
             
-            // Current section index
-            let currentSection = 0;
+            // Current section index - restore from session if available
+            let currentSection = savedSection ? parseInt(savedSection) : 0;
+            
             // Flag to prevent rapid transitions
             let isTransitioning = false;
+            
+            // Initially hide all sections except the current one
+            sections.forEach((section, index) => {
+                if (index !== currentSection) {
+                    section.classList.add('hidden-section');
+                }
+            });
+            
+            // Update active indicator
+            document.querySelectorAll('.page-indicator')[currentSection].classList.add('active');
             
             // Function to switch sections
             function switchSection(direction) {
@@ -87,6 +95,9 @@
                     setTimeout(() => {
                         sections[currentSection].classList.remove('section-enter');
                         isTransitioning = false;
+                        
+                        // Save current section to sessionStorage
+                        sessionStorage.setItem('currentSection', currentSection);
                     }, 600);
                 }, 600);
             }
@@ -234,13 +245,22 @@
                     <p>The most valuable companies will either drive automation, enhance human experiences, or uniquely bridge both worlds.</p>
                 </div>
                 <div class="thesis-visual">
+                    <div class="thesis-animation-wrapper">
+                        <div class="thesis-animation-container">
+                            <div class="circle blue thesis-circle">
+                                <div class="dot blue-dot"></div>
+                            </div>
+                            <div class="circle green thesis-circle">
+                                <div class="dot green-dot"></div>
+                            </div>
+                            <div class="line thesis-line"></div>
+                        </div>
+                    </div>
                     <div class="thesis-half">
-                        <div class="thesis-icon">A</div>
                         <h3>Automation</h3>
                         <p>AI and technology transforming industries, creating efficiency and freeing human potential</p>
                     </div>
                     <div class="thesis-half">
-                        <div class="thesis-icon">E</div>
                         <h3>Experience</h3>
                         <p>Growing demand for meaningful human connections, experiences, and wellness</p>
                     </div>
