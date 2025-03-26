@@ -158,6 +158,91 @@ a {
     max-width: 800px;
     position: relative;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.animation-container {
+    position: relative;
+    width: 400px;
+    height: 200px;
+    margin-bottom: var(--space-sm);
+    margin-top: 30px;
+    transform: scale(1.5);
+}
+
+.circle {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    top: 25px;
+}
+
+.blue {
+    border: 3px solid #0055a4;
+    left: 20px;
+    animation: blueMerge 3s infinite ease-in-out;
+}
+
+.green {
+    border: 3px solid #9caf88;
+    right: 20px;
+    animation: greenMerge 3s infinite ease-in-out;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.blue-dot {
+    background-color: #0055a4;
+}
+
+.green-dot {
+    background-color: #9caf88;
+}
+
+.line {
+    position: absolute;
+    width: 220px;
+    height: 3px;
+    background-color: #0055a4;
+    top: 85px; /* Align with the center of the circles (25px + 120px/2) */
+    left: 50%;
+    transform: translateX(-50%);
+    animation: 
+        lineFade 3s infinite ease-in-out,
+        lineWidth 3s infinite ease-in-out;
+    transform-origin: center;
+}
+
+@keyframes blueMerge {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(100px); }
+}
+
+@keyframes greenMerge {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-100px); }
+}
+
+@keyframes lineFade {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+@keyframes lineWidth {
+    0%, 100% { width: 220px; }
+    50% { width: 30px; }
 }
 
 .hero-pattern {
