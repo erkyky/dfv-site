@@ -164,12 +164,20 @@ a {
     text-align: center;
 }
 
+.company-title {
+    font-size: clamp(3.5rem, 6vw, 5rem);
+    margin-bottom: var(--space-md);
+    letter-spacing: -0.02em;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
 .animation-container {
     position: relative;
     width: 400px;
     height: 200px;
     margin-bottom: var(--space-sm);
-    margin-top: 30px;
+    margin-top: 10px;
     transform: scale(1.5);
 }
 
@@ -227,12 +235,12 @@ a {
 
 @keyframes blueMerge {
     0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(100px); }
+    50% { transform: translateX(80px); }
 }
 
 @keyframes greenMerge {
     0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(-100px); }
+    50% { transform: translateX(-80px); }
 }
 
 @keyframes lineFade {
@@ -241,8 +249,8 @@ a {
 }
 
 @keyframes lineWidth {
-    0%, 100% { width: 220px; }
-    50% { width: 30px; }
+    0%, 100% { width: 230px; }
+    50% { width: 70px; }
 }
 
 .hero-pattern {
