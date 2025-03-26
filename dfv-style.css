@@ -229,6 +229,18 @@ a {
     animation: greenMerge 3s infinite ease-in-out;
 }
 
+.thesisBlue {
+    border: 3px solid #0055a4;
+    left: -10px;
+    animation: thesisBlueMerge 3s infinite ease-in-out;
+}
+
+.thesisGreen {
+    border: 3px solid #9caf88;
+    right: -10px;
+    animation: thesisGreenMerge 3s infinite ease-in-out;
+}
+
 .dot {
     width: 10px;
     height: 10px;
@@ -263,12 +275,22 @@ a {
 
 @keyframes blueMerge {
     0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(80px); }
+    50% { transform: translateX(50px); }
 }
 
 @keyframes greenMerge {
     0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(-80px); }
+    50% { transform: translateX(-50px); }
+}
+
+@keyframes thesisBlueMerge {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(90px); }
+}
+
+@keyframes thesisGreenMerge {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-90px); }
 }
 
 @keyframes lineFade {
@@ -277,7 +299,7 @@ a {
 }
 
 @keyframes lineWidth {
-    0%, 100% { width: 180px; }
+    0%, 100% { width: 170px; }
     50% { width: 60px; }
 }
 
@@ -541,7 +563,7 @@ a {
 }
 
 .thesis-line {
-    width: 210px;
+    width: 220px;
     top: 60px; /* Center with the circles */
     height: 2px;
     animation: 
@@ -550,7 +572,7 @@ a {
 }
 
 @keyframes thesisLineWidth {
-    0%, 100% { width: 205px; }
+    0%, 100% { width: 220px; }
     50% { width: 45px; }
 }
 
