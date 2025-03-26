@@ -147,11 +147,12 @@ a {
 
 /* Hero Section */
 .hero {
-    min-height: 100vh;
+    height: 100vh;
+    padding: 80px 0;
     display: flex;
     align-items: center;
     position: relative;
-    overflow: hidden;
+    overflow-y: auto;
 }
 
 .hero-content {
@@ -384,12 +385,14 @@ a {
 
 /* Thesis Section */
 .thesis {
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     align-items: center;
-    padding: var(--space-xl) 0;
+    justify-content: center;
+    padding: 0;
     background-color: var(--background-alt);
     position: relative;
+    overflow-y: auto;
 }
 
 .thesis::before {
@@ -446,7 +449,7 @@ a {
 
 .thesis-animation-wrapper {
     position: absolute;
-    top: -60px;
+    top: -80px;
     left: 0;
     width: 100%;
     display: flex;
@@ -618,7 +621,7 @@ a {
 
 /* Section Transitions */
 .hidden-section {
-    display: none;
+    display: none !important;
 }
 
 .section-exit {
@@ -641,8 +644,9 @@ a {
 
 /* Make sure sections take full height */
 section {
-    min-height: 100vh;
+    height: 100vh;
     position: relative;
+    overflow-y: auto;
 }
 
 /* Page Indicators */
