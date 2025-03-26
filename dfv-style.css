@@ -153,6 +153,7 @@ a {
     align-items: center;
     position: relative;
     overflow-y: auto;
+    background-color: var(--background-alt);
 }
 
 .hero-content {
