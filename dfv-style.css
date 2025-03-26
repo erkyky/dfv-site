@@ -497,16 +497,16 @@ a {
 }
 
 .thesis-circle.blue {
-    left: 40px;
+    left: 60px;
 }
 
 .thesis-circle.green {
-    right: 40px;
+    right: 60px;
 }
 
 .thesis-line {
-    width: 160px;
-    top: 50px; /* Center with the circles */
+    width: 200px;
+    top: 60px; /* Center with the circles */
     height: 2px;
     animation: 
         lineFade 3s infinite ease-in-out,
@@ -514,7 +514,7 @@ a {
 }
 
 @keyframes thesisLineWidth {
-    0%, 100% { width: 160px; }
+    0%, 100% { width: 200px; }
     50% { width: 40px; }
 }
 
