@@ -1,0 +1,550 @@
+/* Core Variables */
+:root {
+    --background: #0a0a0a;
+    --background-alt: #0c1319;
+    --text: #f5f5f7;
+    --primary: #0055a4;  /* Dark blue from logo */
+    --secondary: #9caf88; /* Sage green from logo */
+    --neutral: #333333;
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 2rem;
+    --space-lg: 4rem;
+    --space-xl: 8rem;
+    --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    --font-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base Styles */
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+a {
+    color: var(--text);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.text-green {
+    color: #9caf88;
+}
+
+.text-blue {
+    color: #0055a4;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+}
+
+/* Navigation */
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    z-index: 100;
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(20px);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--text);
+    opacity: 0.9;
+    letter-spacing: 0.05em;
+}
+
+.logo img {
+    height: 40px;
+    margin-right: var(--space-sm);
+}
+
+.nav-links {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.nav-link {
+    font-size: 0.9rem;
+    font-weight: 400;
+    opacity: 0.7;
+    letter-spacing: 0.03em;
+    position: relative;
+}
+
+.nav-link:after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--secondary);
+    transition: var(--transition);
+}
+
+.nav-link:hover {
+    opacity: 1;
+}
+
+.nav-link:hover:after {
+    width: 100%;
+}
+
+.nav-cta {
+    padding: 0.5rem 1.25rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    background-color: transparent;
+    color: var(--secondary);
+    border: 1px solid var(--secondary);
+    cursor: pointer;
+    transition: var(--transition);
+    letter-spacing: 0.03em;
+}
+
+.nav-cta:hover {
+    background-color: var(--secondary);
+    color: var(--background);
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    max-width: 800px;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-pattern {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.05;
+    z-index: 0;
+    background-image: 
+        linear-gradient(var(--secondary) 1px, transparent 1px),
+        linear-gradient(90deg, var(--secondary) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: -1px -1px;
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.1;
+    margin-bottom: var(--space-md);
+    color: var(--text);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+}
+
+.hero-title .highlight {
+    color: var(--secondary);
+    position: relative;
+    display: inline-block;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.125rem, 2vw, 1.25rem);
+    opacity: 0.8;
+    max-width: 600px;
+    margin-bottom: var(--space-lg);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+}
+
+.hero-links {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.hero-link {
+    display: inline-flex;
+    align-items: center;
+    padding-bottom: 0.2rem;
+    font-weight: 500;
+    position: relative;
+    letter-spacing: 0.02em;
+}
+
+.hero-link:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.hero-link:hover:after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.hero-link-arrow {
+    margin-left: var(--space-xs);
+    transition: var(--transition);
+}
+
+.hero-link:hover .hero-link-arrow {
+    margin-left: var(--space-sm);
+}
+
+.hero-link.companies {
+    color: var(--secondary);
+}
+
+.hero-link.investors {
+    color: var(--text);
+    opacity: 0.8;
+}
+
+.hero-link.investors:hover {
+    opacity: 1;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: var(--space-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    opacity: 0.5;
+    transition: var(--transition);
+}
+
+.scroll-indicator:hover {
+    opacity: 0.8;
+}
+
+.scroll-text {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.scroll-line {
+    width: 1px;
+    height: 60px;
+    background-color: rgba(245, 245, 247, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.scroll-line:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background-color: var(--secondary);
+    animation: scrollAnimation 2s infinite;
+}
+
+@keyframes scrollAnimation {
+    0% { 
+        transform: translateY(-100%);
+    }
+    100% { 
+        transform: translateY(300%);
+    }
+}
+
+/* Thesis Section */
+.thesis {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: var(--space-xl) 0;
+    background-color: var(--background-alt);
+    position: relative;
+}
+
+.thesis::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(0, 53, 102, 0.05) 0%, rgba(10, 10, 10, 0) 70%);
+    pointer-events: none;
+}
+
+.thesis-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+}
+
+.thesis-content h2 {
+    font-size: clamp(2rem, 3vw, 3rem);
+    margin-bottom: var(--space-lg);
+    color: var(--text);
+    position: relative;
+    padding-bottom: var(--space-sm);
+}
+
+.thesis-content h2:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--secondary);
+}
+
+.thesis-content p {
+    font-size: 1.125rem;
+    margin-bottom: var(--space-md);
+    line-height: 1.7;
+    opacity: 0.8;
+}
+
+.thesis-visual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    position: relative;
+    height: 400px;
+}
+
+.thesis-half {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: var(--space-md);
+    background-color: var(--background-alt);
+    transition: var(--transition);
+}
+
+.thesis-half:hover {
+    background-color: rgba(20, 20, 20, 0.9);
+}
+
+.thesis-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: var(--space-md);
+    color: var(--primary);
+    border: 1px solid rgba(0, 53, 102, 0.3);
+    position: relative;
+}
+
+.thesis-half:first-child .thesis-icon {
+    color: var(--primary);
+    border-color: rgba(0, 53, 102, 0.3);
+}
+
+.thesis-half:last-child .thesis-icon {
+    color: var(--secondary);
+    border-color: rgba(156, 175, 136, 0.3);
+}
+
+.thesis-icon:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.05;
+}
+
+.thesis-half:first-child .thesis-icon:after {
+    background-color: var(--primary);
+}
+
+.thesis-half:last-child .thesis-icon:after {
+    background-color: var(--secondary);
+}
+
+.thesis-half h3 {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-sm);
+    color: var(--text);
+}
+
+.thesis-half p {
+    text-align: center;
+    font-size: 0.9375rem;
+    opacity: 0.7;
+    max-width: 240px;
+    line-height: 1.6;
+}
+
+/* Logo Section */
+.logo-section {
+    padding: var(--space-xl) 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-container {
+    max-width: 400px;
+}
+
+.logo-container img {
+    width: 100%;
+    height: auto;
+}
+
+/* Footer */
+.footer {
+    padding: var(--space-lg) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-logo {
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--text);
+    opacity: 0.8;
+    letter-spacing: 0.03em;
+}
+
+.footer-logo span {
+    color: var(--accent-secondary);
+}
+
+.footer-links {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.footer-link {
+    font-size: 0.875rem;
+    opacity: 0.6;
+    transition: var(--transition);
+    letter-spacing: 0.02em;
+}
+
+.footer-link:hover {
+    opacity: 0.9;
+    color: var(--accent-secondary);
+}
+
+.copyright {
+    text-align: center;
+    padding-top: var(--space-md);
+    margin-top: var(--space-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.8125rem;
+    opacity: 0.5;
+}
+
+/* Simple Animations */
+.fade-in {
+    animation: fadeIn 1s ease forwards;
+    opacity: 0;
+}
+
+.fade-in-delay {
+    animation: fadeIn 1s ease 0.3s forwards;
+    opacity: 0;
+}
+
+.fade-in-delay-2 {
+    animation: fadeIn 1s ease 0.6s forwards;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .thesis-container {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+
+    .nav-links {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-xl: 5rem;
+    }
+    
+    .hero-links {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: var(--space-md);
+        text-align: center;
+    }
+}
